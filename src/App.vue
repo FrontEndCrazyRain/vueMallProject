@@ -1,28 +1,30 @@
+<!--
+ * @Author: 崔令雨
+ * @Date: 2022-11-26 10:39:33
+ * @LastEditors: [崔令雨]
+ * @LastEditTime: 2022-11-26 20:34:01
+ * @Description: 
+-->
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <Header></Header>
+    <router-view></router-view>
+    <Footer v-show="footerDisplay" />
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
+  name: 'App',
+  components: { Header, Footer },
+  computed: {
+    footerDisplay() {
+      return this.$route.meta.show;
+    },
   },
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style lang="scss"></style>
