@@ -2,7 +2,7 @@
  * @Author: 崔令雨
  * @Date: 2022-12-26 21:31:50
  * @LastEditors: [崔令雨]
- * @LastEditTime: 2022-12-30 21:32:45
+ * @LastEditTime: 2022-12-30 21:52:07
  * @Description:
  */
 const routes = [
@@ -13,7 +13,7 @@ const routes = [
     meta: { show: true },
   },
   {
-    path: '/addSuccess',
+    path: '/shopCart',
     component: () => import('@/page/ShopCart'),
     meta: { show: true },
   },
