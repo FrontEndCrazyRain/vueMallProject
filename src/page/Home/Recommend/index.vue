@@ -2,7 +2,7 @@
  * @Author: 崔令雨
  * @Date: 2022-11-28 12:14:39
  * @LastEditors: [崔令雨]
- * @LastEditTime: 2022-11-28 12:47:15
+ * @LastEditTime: 2022-12-06 11:04:43
  * @Description: 
 -->
 <template>
@@ -51,6 +51,7 @@ export default {};
   height: 163px;
   .core {
     @include versionCenter;
+    margin-top: 15px;
     ul {
       display: flex;
       li {

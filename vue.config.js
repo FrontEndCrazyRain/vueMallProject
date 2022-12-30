@@ -2,7 +2,7 @@
  * @Author: 崔令雨
  * @Date: 2022-11-26 10:39:33
  * @LastEditors: [崔令雨]
- * @LastEditTime: 2022-11-27 20:43:18
+ * @LastEditTime: 2022-11-28 20:45:15
  * @Description:
  */
 const { defineConfig } = require('@vue/cli-service');
@@ -29,5 +29,12 @@ module.exports = defineConfig({
       .loader('svg-sprite-loader')
       .options({ symbolId: 'icon-[name]' })
       .end();
+  },
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://gmall-h5-api.atguigu.cn',
+      },
+    },
   },
 });

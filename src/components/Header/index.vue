@@ -2,7 +2,7 @@
  * @Author: 崔令雨
  * @Date: 2022-11-26 11:44:02
  * @LastEditors: [崔令雨]
- * @LastEditTime: 2022-11-28 15:11:29
+ * @LastEditTime: 2022-12-05 13:47:50
  * @Description: 
 -->
 <template>
@@ -45,8 +45,8 @@
             <input
               type="text"
               placeholder="请输入"
-              v-model.trim="commodity" />
-            <button @click="searchProducts">搜索</button>
+              v-model.trim="keyWord" />
+            <button @click.prevent="searchProducts">搜索</button>
           </form>
         </div>
       </div>
@@ -58,13 +58,26 @@
 export default {
   data() {
     return {
-      commodity: '' || undefined,
+      keyWord: '',
     };
   },
   methods: {
     searchProducts() {
-      this.$router.push(`/search/${this.commodity}`);
+      let obj = {
+        name: 'search',
+        params: {
+          keyWord: this.keyWord || undefined,
+        },
+      };
+      let query = this.$route.query;
+      if (query) obj.query = query;
+      this.$router.push(obj);
     },
+  },
+  mounted() {
+    this.$bus.$on('deleteKey', () => {
+      this.keyWord = undefined;
+    });
   },
 };
 </script>

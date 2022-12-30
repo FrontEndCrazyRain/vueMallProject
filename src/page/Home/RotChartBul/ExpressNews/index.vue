@@ -2,7 +2,7 @@
  * @Author: 崔令雨
  * @Date: 2022-11-27 12:34:23
  * @LastEditors: [崔令雨]
- * @LastEditTime: 2022-11-28 16:50:49
+ * @LastEditTime: 2022-11-30 14:39:05
  * @Description: 
 -->
 <template>
@@ -122,10 +122,7 @@
 </template>
 
 <script>
-import SvgIcon from '@/components/SvgIcon';
-export default {
-  components: { SvgIcon },
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>
@@ -133,7 +130,7 @@ export default {
 
 .express_news {
   border: 1px solid #e4e4e4;
-  float: left;
+  float: right;
   margin-top: 5px;
   height: 453px;
   width: 259px;

@@ -2,16 +2,24 @@
  * @Author: 崔令雨
  * @Date: 2022-11-27 10:51:18
  * @LastEditors: [崔令雨]
- * @LastEditTime: 2022-11-27 11:54:26
+ * @LastEditTime: 2022-12-28 19:55:37
  * @Description: 
 -->
 <template>
   <div class="commodityClassification">
     <div class="nav">
       <div class="left">
-        <h1>全部商品分类</h1>
-        <hr />
-        <ClassNav />
+        <div
+          @mouseleave="mouseLeftToRemoveBackground"
+          @mouseenter="moveInDisplay">
+          <h1>全部商品分类</h1>
+          <hr />
+          <transition name="sort">
+            <ClassNav
+              :alirKeluarLatar="alirKeluarLatar"
+              v-show="show" />
+          </transition>
+        </div>
       </div>
 
       <div class="right">
@@ -32,6 +40,34 @@
 import ClassNav from './ClassNav';
 export default {
   components: { ClassNav },
+  created() {
+    this.$store.dispatch('home/categoryList');
+  },
+  data() {
+    return {
+      res: '',
+      show: true,
+    };
+  },
+
+  methods: {
+    mouseLeftToRemoveBackground() {
+      if ((this.$route.path !== '/home') & (this.$route.path !== '/')) this.show = false;
+      this.res();
+    },
+    alirKeluarLatar(res) {
+      this.res = res;
+    },
+    moveInDisplay() {
+      this.show = true;
+    },
+  },
+  mounted() {
+    let path = this.$route.path;
+    if (path === '/search' || path.indexOf('/detail') !== -1) {
+      this.show = false;
+    }
+  },
 };
 </script>
 
@@ -53,6 +89,15 @@ export default {
         padding: 14px 0;
         color: #ffffff;
         font-size: 14px;
+      }
+      .sort-enter {
+        height: 0;
+      }
+      .sort-enter-to {
+        height: 479.4px;
+      }
+      .sort-enter-active {
+        transition: all 0.5s linear;
       }
     }
     .right {

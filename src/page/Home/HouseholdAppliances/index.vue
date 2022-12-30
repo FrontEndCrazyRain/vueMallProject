@@ -2,7 +2,7 @@
  * @Author: 崔令雨
  * @Date: 2022-11-28 17:08:10
  * @LastEditors: [崔令雨]
- * @LastEditTime: 2022-11-28 18:09:33
+ * @LastEditTime: 2022-11-30 15:36:39
  * @Description: 
 -->
 <template>
@@ -10,30 +10,14 @@
     <div class="edition_heart">
       <div class="top">
         <div class="left">
-          <h1>家用电器</h1>
+          <h1>{{ item.name }}</h1>
         </div>
         <div class="right">
           <ul>
-            <li>
-              <a href="javascript:;">热门</a>
-            </li>
-            <li>
-              <a href="javascript:;">大家电</a>
-            </li>
-            <li>
-              <a href="javascript:;">生活电器</a>
-            </li>
-            <li>
-              <a href="javascript:;">厨房电器</a>
-            </li>
-            <li>
-              <a href="javascript:;">应季电器</a>
-            </li>
-            <li>
-              <a href="javascript:;">空气/净水</a>
-            </li>
-            <li>
-              <a href="javascript:;">高端电器</a>
+            <li
+              v-for="(ketWord, index) in item.keywords"
+              :key="index">
+              <a href="javascript:;">{{ ketWord }}</a>
             </li>
           </ul>
         </div>
@@ -43,51 +27,63 @@
           <div class="tab_01">
             <div class="first">
               <ul>
-                <li>节能补贴</li>
-                <li>4K电视</li>
-                <li>空气净化器</li>
-                <li>IH电饭煲</li>
-                <li>滚筒洗衣机</li>
-                <li>电热水器</li>
+                <li
+                  v-for="(n, i) in item.navList"
+                  :key="i">
+                  {{ n.text }}
+                </li>
               </ul>
             </div>
             <img
-              src="../../../assets/floor-1-1.png"
+              :src="item.imgUrl"
               alt="floor" />
           </div>
           <div class="tab_02">
-            <img
-              src="../../../assets/floor-1-b01.png"
-              alt="floor-1-b01" />
+            <div class="swiper">
+              <div class="swiper-wrapper">
+                <div
+                  class="swiper-slide"
+                  v-for="carousel in item.carouselList"
+                  :key="carousel.id">
+                  <img :src="carousel.imgUrl" />
+                </div>
+              </div>
+              <!-- 如果需要分页器 -->
+              <div class="swiper-pagination pager"></div>
+
+              <!-- 如果需要导航按钮 -->
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+            </div>
           </div>
           <div class="tab_03">
             <span></span>
             <div>
               <img
-                src="../../../assets/floor-1-2.png"
+                :src="item.recommendList[0]"
                 alt="" />
             </div>
             <div>
               <img
-                src="../../../assets/floor-1-3.png"
+                :src="item.recommendList[1]"
                 alt="" />
             </div>
           </div>
           <div class="tab_04">
             <img
-              src="../../../assets/floor-1-4.png"
+              :src="item.bigImg"
               alt="" />
           </div>
           <div class="tab_05">
             <span></span>
             <div>
               <img
-                src="../../../assets/floor-1-5.png"
+                :src="item.recommendList[2]"
                 alt="" />
             </div>
             <div>
               <img
-                src="../../../assets/floor-1-6.png"
+                :src="item.recommendList[3]"
                 alt="" />
             </div>
           </div>
@@ -98,7 +94,27 @@
 </template>
 
 <script>
-export default {};
+import 'swiper/swiper-bundle.min.css';
+import Swiper from 'swiper/swiper-bundle.min.js';
+export default {
+  props: ['item'],
+  mounted() {
+    var mySwiper = new Swiper('.swiper', {
+      // direction: 'vertical', // 垂直切换选项
+      loop: true, // 循环模式选项
+
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+      },
+      // 如果需要前进后退按钮
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -163,6 +179,11 @@ export default {};
             width: 100%;
             margin-top: 15px;
           }
+        }
+        .tab_02 {
+          width: 330px;
+          position: relative;
+          overflow: hidden;
         }
         .tab_05,
         .tab_03 {
